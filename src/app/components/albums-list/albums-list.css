@@ -1,0 +1,9 @@
+li.album {
+  display: inline;
+  transition: all .3s ease-in-out;
+  cursor: pointer;
+}
+
+li.album :hover {
+  transform: scale(1.1);
+}
