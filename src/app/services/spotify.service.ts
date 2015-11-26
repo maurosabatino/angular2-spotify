@@ -7,17 +7,18 @@ import { DEFAULT_OPTIONS } from './spotify.constants';
 
 @Injectable()
 export class SpotifyService implements SpotifyApi {
-	options: SpotifyOptions;
   
-	constructor (private http: Http/*, private options?: SpotifyOptions = DEFAULT_OPTIONS*/) {
-		this.options = DEFAULT_OPTIONS;
-	}
+  private options: SpotifyOptions;
+  
+	constructor (private http: Http/*, private options?: SpotifyOptions*/) {
+    this.options = DEFAULT_OPTIONS;
+  }
 	
 	search(text: string, types: Array<string>): Promise<SearchResponse> {
 		return new Promise((resolve, reject) => {
       let endpoint     = this.getSearchEndpoint(),
           searchParams = this.getURLSearchParams({ 
-            q: text, 
+            q: encodeURI(text), 
             type: types.join(',')
           }),
           options      = { search: searchParams };
