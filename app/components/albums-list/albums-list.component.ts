@@ -1,4 +1,4 @@
-import { Component, View, Input, NgIf, NgFor } from 'angular2/angular2';
+import { Component, View, Input } from 'angular2/core';
 import { Album } from '../../entities/album.entity';
 
 @Component({
@@ -7,7 +7,7 @@ import { Album } from '../../entities/album.entity';
 @View({
   templateUrl: 'app/components/albums-list/albums-list.html',
   styleUrls: ['app/components/albums-list/albums-list.css'],
-  directives: [ NgIf, NgFor ]
+  directives: []
 })
 export class AlbumsListComponent {
   

@@ -4,6 +4,7 @@
 		'https://api.spotify.com',
 		'v1',
 		{
-			search: 'search'
+			search: 'search',
+      artist: 'artists'
 		}
 	);

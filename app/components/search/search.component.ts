@@ -1,4 +1,5 @@
-import { Component, View, FORM_DIRECTIVES, CORE_DIRECTIVES } from 'angular2/angular2';
+import { Component, View } from 'angular2/core';
+import { Router } from 'angular2/router';
 import { SpotifyService} from '../../services/spotify.service';
 import { Album } from '../../entities/album.entity';
 import { Artist } from '../../entities/artist.entity';
@@ -11,21 +12,21 @@ import { AlbumsListComponent } from '../albums-list/albums-list.component';
 })
 @View({
 	template: `
-		<input type="search" (keyup.enter)="search(text)" [(ng-model)]="text"></input>
+		<input type="search" (keyup.enter)="search(text)" [(ngModel)]="text"/>
 		<button (click)="search(text)">Search</button>
     
-    <div *ng-if="artists?.length > 0">
+    <div *ngIf="artists?.length > 0">
       <h2>Artists</h2>
       <ul>
-        <li *ng-for="#artist of artists">
-          <img [src]="artist.images[1].url"></img>
+        <li (click)="goToArtistPage(artist.id)" *ngFor="#artist of artists">
+          <img [src]="artist.images[1].url"/>
         </li>
       </ul>
     </div>
     
     <albums-list [albums]="albums"></albums-list>
 	`,
-	directives: [ FORM_DIRECTIVES, AlbumsListComponent, CORE_DIRECTIVES ]
+	directives: [ AlbumsListComponent ]
 })
 export class SpotifySearchComponent {
 	text: string;
@@ -33,7 +34,7 @@ export class SpotifySearchComponent {
   artists: Array<Artist>;
   track: Array<Track>;
 	
-	constructor (private spotify: SpotifyService) {}
+	constructor (private spotify: SpotifyService, private router: Router) {}
 	
 	search (text: string) {
 		this.spotify.search(text, [ 'artist', 'album', 'track' ]).then((response) => {
@@ -43,4 +44,8 @@ export class SpotifySearchComponent {
 			
 		});
 	}
+  
+  goToArtistPage (id: string) {
+    this.router.navigate(['/Artist', { id: id }]);
+  }
 }

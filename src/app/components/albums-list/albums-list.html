@@ -1,9 +1,0 @@
-<div *ng-if="albums?.length > 0">
-  <h2>Albums</h2>
-  <ul>
-    <li *ng-for="#album of albums" class="album">
-      <img [src]="album.images[1].url" (click)="open()"></img>
-      <!--<span>{{album.name}}</span>-->
-    </li>  
-  </ul>
-</div>
