@@ -14,7 +14,7 @@ import { AlbumsListComponent } from '../albums-list/albums-list.component';
 	template: `
 		<input type="search" (keyup.enter)="search(text)" [(ngModel)]="text"/>
 		<button (click)="search(text)">Search</button>
-    
+
     <div *ngIf="artists?.length > 0">
       <h2>Artists</h2>
       <ul>
@@ -23,7 +23,7 @@ import { AlbumsListComponent } from '../albums-list/albums-list.component';
         </li>
       </ul>
     </div>
-    
+
     <albums-list [albums]="albums"></albums-list>
 	`,
 	directives: [ AlbumsListComponent ]
@@ -33,18 +33,18 @@ export class SpotifySearchComponent {
   albums: Array<Album>;
   artists: Array<Artist>;
   track: Array<Track>;
-	
+
 	constructor (private spotify: SpotifyService, private router: Router) {}
-	
+
 	search (text: string) {
-		this.spotify.search(text, [ 'artist', 'album', 'track' ]).then((response) => {
+		this.spotify.search(text, [ 'artist', 'album', 'track' ]).subscribe((response) => {
 			//console.log(response);
       this.albums = response.albums.items;
       this.artists = response.artists.items;
-			
+
 		});
 	}
-  
+
   goToArtistPage (id: string) {
     this.router.navigate(['/Artist', { id: id }]);
   }

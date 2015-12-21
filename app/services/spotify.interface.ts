@@ -1,7 +1,8 @@
+import { Observable} from 'rxjs';
 import { SearchResponse } from '../entities/response.entity';
 import { Artist } from '../entities/artist.entity';
 
-export interface SpotifyApi {
-	search(text: string, types: Array<string>): Promise<SearchResponse>;
-  getArtist(id: string): Promise<Artist>;
+export interface ISpotify {
+	search(text: string, types: Array<string>): Observable<SearchResponse>;
+  getArtist(id: string): Observable<Artist>;
 }

@@ -1,13 +1,14 @@
 import { Injectable } from 'angular2/core';
+import { Observable} from 'rxjs';
 import { Http, URLSearchParams } from 'angular2/http';
-import { SpotifyApi } from './spotify.interface';
+import { ISpotify } from './spotify.interface';
 import { SearchResponse } from '../entities/response.entity';
 import { Artist } from '../entities/artist.entity';
 import { SpotifyOptions } from '../entities/spotify-options.entity';
 import { DEFAULT_OPTIONS } from './spotify.constants';
 
 @Injectable()
-export class SpotifyService implements SpotifyApi {
+export class SpotifyService implements ISpotify {
 
   private options: SpotifyOptions;
 
@@ -15,29 +16,23 @@ export class SpotifyService implements SpotifyApi {
     this.options = DEFAULT_OPTIONS;
   }
 
-  getArtist (id: string): Promise<Artist> {
-    return new Promise((resolve, reject) => {
-      let endpoint = this.getArtistEndpoint(id);
+  getArtist (id: string): Observable<Artist> {
+    let endpoint = this.getArtistEndpoint(id);
 
-      this.http.get(endpoint)
-        .map(res => res.json())
-        .subscribe(response => resolve(response));
-    });
+    return this.http.get(endpoint)
+      .map(res => res.json());
   }
 
-	search(text: string, types: Array<string>): Promise<SearchResponse> {
-		return new Promise((resolve, reject) => {
-      let endpoint     = this.getSearchEndpoint(),
-          searchParams = this.getURLSearchParams({
-            q: encodeURI(text),
-            type: types.join(',')
-          }),
-          options      = { search: searchParams };
+	search(text: string, types: Array<string>): Observable<SearchResponse> {
+    let endpoint     = this.getSearchEndpoint(),
+        searchParams = this.getURLSearchParams({
+          q: encodeURI(text),
+          type: types.join(',')
+        }),
+        options      = { search: searchParams };
 
-			this.http.get(endpoint, options)
-				.map(res => res.json())
-				.subscribe(response => resolve(response));
-		});
+		return this.http.get(endpoint, options)
+			.map(res => res.json());
 	}
 
   private getJSONResponse (response) {

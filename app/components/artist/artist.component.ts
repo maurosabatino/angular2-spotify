@@ -18,18 +18,14 @@ import { Artist } from '../../entities/artist.entity';
 export class ArtistComponent implements OnInit {
   private error: boolean;
   private artist: Artist;
-  
+
   constructor (private spotifyService: SpotifyService, private routeParams: RouteParams) {
     console.log(routeParams);
   }
 
   ngOnInit () {
     this.spotifyService.getArtist(this.routeParams.params['id'])
-      .then(artist => this.artist = artist)
-      .catch(error => {
-        this.error = true;
-        console.log(error);
-      });
+      .subscribe(artist => this.artist = artist);
   }
 
 }
