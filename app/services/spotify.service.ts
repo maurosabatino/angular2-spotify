@@ -1,14 +1,14 @@
 import { Injectable } from 'angular2/core';
 import { Observable} from 'rxjs';
 import { Http, URLSearchParams } from 'angular2/http';
-import { ISpotify } from './spotify.interface';
+import { ISpotifyService } from './spotify.interface';
 import { SearchResponse } from '../entities/response.entity';
 import { Artist } from '../entities/artist.entity';
 import { SpotifyOptions } from '../entities/spotify-options.entity';
 import { DEFAULT_OPTIONS } from './spotify.constants';
 
 @Injectable()
-export class SpotifyService implements ISpotify {
+export class SpotifyService implements ISpotifyService {
 
   private options: SpotifyOptions;
 
