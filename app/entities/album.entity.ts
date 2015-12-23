@@ -4,5 +4,5 @@ export class Album {
 	external_urls: any;
 	href: string;
 	images: Array<any>;
-	
+	name: string;
 }

@@ -30,10 +30,11 @@ export interface IArtistsService {
 
   /**
    * Get Spotify catalog information about an artist’s top tracks by country.
-   * @param  {string}              id [description]
-   * @return {Observable<Track[]>}    [description]
+   * @param  {string}              id      [description]
+   * @param  {string}              country [description]
+   * @return {Observable<Track[]>}         [description]
    */
-  getArtistTopTracks (id: string): Observable<Track[]>;
+  getArtistTopTracks (id: string, country: string): Observable<Track[]>;
 
   /**
    * Get Spotify catalog information about artists similar to a given artist.

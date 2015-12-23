@@ -5,4 +5,5 @@ export class Artist {
 	href: 				 string;
 	id: 					 string;
 	images: 			 Array<any>;
+  name:          string;
 }

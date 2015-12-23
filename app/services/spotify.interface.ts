@@ -1,6 +1,5 @@
-import { Observable} from 'rxjs';
-import { SearchResponse } from '../entities/response.entity';
-import { Artist } from '../entities/artist.entity';
+import { Observable } from 'rxjs';
+import { Artist, Album, SearchResponse } from '../entities/entities';
 
 export interface ISpotifyService {
 	search(text: string, types: Array<string>): Observable<SearchResponse>;
